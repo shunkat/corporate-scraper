@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <button onClick="runInParallel()">並列実行</button>
+    <script>
+      let index = 1561;
+      const limit = 30;
+
+      function runInParallel() {
+        for (let i = 1; i <= limit; i++) {
+          run(i + index);
+        }
+      }
+
+      function run(index) {
+        // GASの process10sec を実行する（引数は row）。完了したら doProcess10sec を再度実行する
+        google.script.run.withSuccessHandler(run).withFailureHandler(run).run(index);
+        index += 30
+      }
+    </script>
+  </body>
+</html>
